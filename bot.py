@@ -15,7 +15,7 @@ import traceback
 # 
 
 # logging.basicConfig(level=logging.DEBUG)
-TOKEN = '677617003:AAEJr4hOJzFGqDNI6CO8jpSJzqdhnNaEghI'
+TOKEN = '677617003:AAEJr4hOJzFGqDNI6CO8jpSJzqdhnNaEghI' # TODO: change this token. It should be in config file!
 MESSAGES = {
     "welcome": "Welcome!",
     "asking_to_verify_money_in_pocket": "Let's check money in your pocket. How much do you have?",
