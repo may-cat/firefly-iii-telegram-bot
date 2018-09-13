@@ -9,13 +9,18 @@ import logging
 import firefly
 import users
 import traceback
+import json
 
 #########################################################################################
 # Basic config
 # 
 
-# logging.basicConfig(level=logging.DEBUG)
-TOKEN = '677617003:AAEJr4hOJzFGqDNI6CO8jpSJzqdhnNaEghI' # TODO: change this token. It should be in config file!
+# Load configs
+content_file = open("config.json", 'r')
+content = content_file.read()
+content_file.close()
+CONFIGS = json.loads(content) #TODO: make error message if configs file doesn't exist or is corrupted
+
 MESSAGES = {
     "welcome": "Welcome!",
     "asking_to_verify_money_in_pocket": "Let's check money in your pocket. How much do you have?",
@@ -79,7 +84,7 @@ class ScheduledTeleBot(telebot.TeleBot):
 # Main variables
 # 
 
-bot = ScheduledTeleBot(TOKEN)
+bot = ScheduledTeleBot(CONFIGS["telegram_token"])
 logger = logging.getLogger('TeleBot')
 users=users.User()
 
@@ -328,8 +333,8 @@ def recieved_number(message):
 #########################################################################################
 # Main executing code
 # 
-
-schedule.every().day.at("20:00").do(job)
+                    # TODO: scheduling should be in config or in personal user's settings
+schedule.every().day.at("20:00").do(cronjob)
 #schedule.every().minute.do(cronjob)
 
 bot.polling(schedule)
