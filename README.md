@@ -1,4 +1,4 @@
-# Telegram bot for Firefly III
+# Telegram bot for Firefly III (alfa version! Can contain bugs, please send your issues!)
 
 This is bot for [firefly iii](https://github.com/firefly-iii/firefly-iii).
 
