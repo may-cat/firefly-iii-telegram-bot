@@ -40,7 +40,7 @@ pip3 install -r requirements.txt
 
 Find user `@BotFather` in your telegram. Register new bot with `/newbot` command - you will get access token like this: `677617003:AAEJr4hOJzFGqDNI6CO8jpSJzqdhnNaEghI`.
 
-Copy `data.json.example` to `data.json` and put your access token there.
+Copy `config.json.example` to `config.json` and put your access token there.
 
 ### Running bot manually
 
