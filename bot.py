@@ -192,7 +192,7 @@ def choose_pocket(message):
             users.setPocket(message.from_user.username, value=message_pocket, account_id=account_id, account_currency=account_currency)
             users.setAuthorized(message.from_user.username)
             # Send welcome message            
-            markup = telebot.types.ReplyKeyboardHide(selective=False)
+            markup = telebot.types.ReplyKeyboardRemove(selective=False)
             bot.send_message(message.chat.id, MESSAGES["rules_introduction"], reply_markup=markup)
         else:
             for pocket in pockets:
@@ -278,11 +278,11 @@ def took_money(message):
     #    TODO: ask user for balance. With buttons.
         pass
     elif not message_number:
-        markup = telebot.types.ReplyKeyboardHide()
+        markup = telebot.types.ReplyKeyboardRemove()
         bot.reply_to(message, MESSAGES["no_amount_sent"], reply_markup=markup)
     else:
         firefly.take(message.from_user.username, users, int(message_number), message_balance, message_text)
-        markup = telebot.types.ReplyKeyboardHide()
+        markup = telebot.types.ReplyKeyboardRemove()
         bot.reply_to(message, MESSAGES["thankyou"], reply_markup=markup)
         pass
 
@@ -302,7 +302,7 @@ def _talk_about_spent_money(message_to_reply, message_number="",message_budget="
     # if everything got - just add it to firefly
     else:
         try:
-            markup = telebot.types.ReplyKeyboardHide()
+            markup = telebot.types.ReplyKeyboardRemove()
             firefly.spend(message_to_reply.from_user.username, users, int(message_number), message_budget, message_text)
             bot.reply_to(message_to_reply, MESSAGES["thankyou"], reply_markup=markup)
         except Exception as err:
