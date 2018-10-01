@@ -242,11 +242,13 @@ def got_reply_on_cron(message):
 
                 markup = telebot.types.ReplyKeyboardMarkup()
                 for balance in balances:
-                    markup.row(telebot.types.KeyboardButton('took '+str(balance_diff)+' from '+str(balance)))
+                    markup.row(telebot.types.KeyboardButton('took '+str(abs(balance_diff))+' from '+str(balance)))
                 bot.reply_to(message, MESSAGES["where_did_you_get_money"], reply_markup=markup)
+            elif message_integer < current_balance:
+                bot.send_message(message.chat.id, "You have spent "+str(abs(balance_diff))+".")
+                _talk_about_spent_money(message, message_number=str(abs(balance_diff)))
             else:
-                bot.send_message(message.chat.id, "You have spent "+str(balance_diff)+".")
-                _talk_about_spent_money(message, message_number=str(balance_diff))
+                bot.send_message(message.chat.id, "Nothing changed. Thanks for info!")
         except Exception as err:
             print(err)
 
