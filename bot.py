@@ -42,7 +42,9 @@ MESSAGES = {
     "request_for_server_failed_validation": "Doesn't look like server url",
     "request_for_oauth_key": "Please, tell me firefly access token (for example `eyJ0eXAiOiJKV1QiLCJZboci9iJSUzI1NiIsImp0aSI6ImY1YWY0Yzc2ZTBkNDliNjA2ZTAwZjcyYTc0YjQ4YzM4MTc1Y2JjNWI4MjU1MWU3NDMwNTM5MWJkNGRiYmU0NDk2ODE1MGRmYThhYjg0NzM2In0`)",
     #
-    "rules_introduction": "You can send me spent money at any time (for example `123 tea`). Once a day I will ask you, how much money do you have in your pocket."
+    "rules_introduction": "You can send me spent money at any time (for example `123 tea`). Once a day I will ask you, how much money do you have in your pocket.",
+    #
+    "money_in_pocket_update_transaction": "updating amount of money"
 }
 firefly = firefly.Firefly()
 
@@ -295,6 +297,9 @@ def took_money(message):
 def _talk_about_spent_money(message_to_reply, message_number="",message_budget="",message_text=""):
     # get budgets from firefly
     budgets=firefly.getBudgets(message_to_reply.from_user.username, users)
+
+    if not message_text or message_text.isspace():
+        message_text=MESSAGES["money_in_pocket_update_transaction"]
 
     if not message_budget:
         markup = telebot.types.ReplyKeyboardMarkup()
